@@ -1,4 +1,4 @@
-"""Prompt templates. Kept in one place so they're easy to iterate on."""
+
 from __future__ import annotations
 
 import re
