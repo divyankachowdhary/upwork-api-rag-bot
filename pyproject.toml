@@ -1,5 +1,5 @@
 [project]
-name = "rag-on-docs-solution"
+name = "rag-on-docs"
 version = "0.1.0"
 description = "Upwork API Support Bot — complete reference implementation"
 requires-python = ">=3.11"
