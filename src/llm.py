@@ -1,4 +1,4 @@
-"""LLM layer: Groq client, prompted call, latency timing."""
+
 from __future__ import annotations
 
 import functools
@@ -28,8 +28,7 @@ def _get_client() -> Groq:
     key = os.environ.get("GROQ_API_KEY")
     if not key:
         raise RuntimeError(
-            "GROQ_API_KEY is not set. Copy .env.example to .env "
-            "and add your key. Get one free at https://console.groq.com/keys"
+            "GROQ_API_KEY is not set."
         )
     return Groq(api_key=key)
 
@@ -50,17 +49,12 @@ def answer(question: str, chunks: list[Document]) -> Answer:
         temperature=0,
     )
     elapsed = time.perf_counter() - start
-
-    # message.content is Optional[str] in the Groq SDK; guard it.
     text = (resp.choices[0].message.content or "").strip()
     return Answer(text=text, latency_seconds=elapsed)
 
 
 def stream_answer(question: str, chunks: list[Document]) -> Iterator[str]:
-    """Yield token deltas as they arrive from the LLM.
-
-    Caller can wrap this in time.perf_counter() to measure end-to-end latency.
-    """
+ 
     client = _get_client()
     stream = client.chat.completions.create(
         model=LLM_MODEL,
