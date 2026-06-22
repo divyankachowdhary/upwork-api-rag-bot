@@ -1,7 +1,4 @@
-"""One-time ingestion: PDF -> chunks -> embeddings -> Chroma.
 
-Run from the project root:  python -m src.ingest
-"""
 from __future__ import annotations
 
 import shutil
@@ -23,7 +20,6 @@ from src.loaders import load_pdf
 
 
 def sanity_check(pages: list[Document]) -> None:
-    """Assignment A1: print total char count and a sample of the text."""
     if not pages:
         raise ValueError(
             f"Loader returned 0 pages from {PDF_PATH}. "
@@ -45,7 +41,6 @@ def chunk_documents(docs: list[Document]) -> list[Document]:
 
 
 def build_vectorstore(chunks: list[Document]) -> None:
-    # Wipe any prior index so re-runs don't double-insert.
     if CHROMA_DIR.exists():
         shutil.rmtree(CHROMA_DIR)
 
