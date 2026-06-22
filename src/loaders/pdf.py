@@ -1,10 +1,4 @@
-"""PDF -> list[Document] loader backed by pdfplumber.
 
-We use pdfplumber instead of pypdf because the source PDF mixes prose with
-parameter tables. pypdf flattens tables into hard-to-parse runs; pdfplumber
-exposes structured tables that we serialize back to text so the downstream
-500/50 character chunker indexes them as searchable rows.
-"""
 from __future__ import annotations
 
 from pathlib import Path
@@ -14,12 +8,6 @@ from langchain_core.documents import Document
 
 
 def _serialize_table(table: list[list[str | None]]) -> str:
-    """Convert a pdfplumber table (list of rows) to one row-per-line text.
-
-    The first row is treated as headers; each subsequent row becomes
-    "header1: value1 | header2: value2 | ...". Empty cells are dropped so
-    the result stays readable when embedded.
-    """
     if not table or len(table) < 2:
         return ""
 
@@ -38,7 +26,6 @@ def _serialize_table(table: list[list[str | None]]) -> str:
 
 
 def load_pdf(path: Path) -> list[Document]:
-    """Return one LangChain Document per page, with prose + serialized tables."""
     if not path.exists():
         raise FileNotFoundError(f"Source PDF not found: {path}")
 
