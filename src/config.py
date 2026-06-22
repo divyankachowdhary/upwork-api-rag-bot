@@ -1,4 +1,4 @@
-"""Shared constants. One place to change paths and model names."""
+
 from pathlib import Path
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
