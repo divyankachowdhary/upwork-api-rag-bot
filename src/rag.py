@@ -1,4 +1,4 @@
-"""Retrieval layer: open the persisted Chroma index and fetch relevant chunks."""
+
 from __future__ import annotations
 
 import re
@@ -250,7 +250,6 @@ def retrieve(query: str, vectorstore: Chroma, k: int = TOP_K) -> list[Document]:
 
 
 if __name__ == "__main__":
-    # Smoke test: confirm retrieval works on a known topic.
     vs = load_vectorstore()
     docs = retrieve("rate limit", vs)
     for i, d in enumerate(docs, 1):
