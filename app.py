@@ -1,7 +1,4 @@
-"""Streamlit UI for the Upwork API Support Bot.
 
-Run from the project root:  streamlit run app.py
-"""
 from __future__ import annotations
 
 import time
